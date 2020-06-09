@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+		  <param-name>contextConfigLocation</param-name>
+		  <param-value>/WEB-INF/spring/dispatcher-servlet.xml</param-value>		
+		</init-param>
+		
+		<load-on-startup>1</load-on-startup>
+		
+		 <multipart-config>
+		   <location>c:\tmp</location>
+		 </multipart-config>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<!-- 
+		<url-pattern>*.html</url-pattern>
+		 -->
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>	
+	<!--Spring Security Filter -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+		<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+	    <url-pattern>/*</url-pattern>
+	</filter-mapping>	
+
+<!-- needed for ContextLoaderListener  -->
+<context-param>
+	<param-name>contextConfigLocation</param-name>
+	<param-value>/WEB-INF/spring/root-context.xml,	
+	             /WEB-INF/spring/security.xml</param-value>
+</context-param>
+<!-- Bootstraps the root web application context before servlet initialization -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+<!-- pegamos codigo curso spring udemy seguridad-->
+<!--  
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>URLs protegidas solo para el rol Editor</web-resource-name>
+ -->
+			<!--Define the context-relative URL(s) to be protected -->	
+<!--  		
+			<url-pattern>/horarios/*</url-pattern>
+			<url-pattern>/noticias/*</url-pattern>
+			<url-pattern>/peliculas/*</url-pattern>
+		</web-resource-collection>
+	<auth-constraint>
+  -->
+		<!--Anyone with this role may access this area -->
+<!--  
+		<role-name>editor</role-name>
+	</auth-constraint>
+	</security-constraint>
+ -->	
+	<!-- pegamos 2 codigo curso spring seguridad UDEMY-->
+<!--  
+	<login-config>
+	   <auth-method>BASIC</auth-method>
+	</login-config>
+ -->	
+</web-app>
